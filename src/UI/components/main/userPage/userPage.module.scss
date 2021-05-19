@@ -1,0 +1,20 @@
+.container {
+  background-color: #F9F9F9;
+  height: 100vh;
+  display: grid;
+  grid-template-areas:
+    'profile repositories repositories';
+  grid-template-columns: 4fr 8fr;
+}
+
+.profile {
+  grid-area: profile;
+  img{
+    width: 200px;
+    border-radius: 50%;
+  }
+}
+
+.repositories {
+  grid-area: repositories;
+}

@@ -5,13 +5,19 @@
   flex-direction: column;
   justify-content:center;
   align-items: center;
+
   .searchText{
-    width:210px;
     font-family: Inter;
     font-style: normal;
-    font-weight: normal;
-    font-size: 22px;
+    font-weight: bold;
+    font-size: 27px;
     line-height: 140%;
+
     text-align: center;
+
+    color: #808080;
+
+
+
   }
 }

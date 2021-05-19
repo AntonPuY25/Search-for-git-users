@@ -4,7 +4,7 @@ import {Api, TypeResponseDataUser} from "../../API/api";
 const initialState:TypeInitialState = {
     error:'',
     status:'free',
-    data:[]
+    data:null
 }
 const setStatusAC = (status:TypeStatus)=>{
     return{
@@ -54,9 +54,11 @@ export const getDataTC = ()=> async (dispatch:Dispatch<TypeActions>)=>{
         let result = await Api.getUsers()
         dispatch(setDataAC(result))
         dispatch(setStatusAC('succeed'))
+
     }catch (e) {
         dispatch(setStatusAC('error'))
-        dispatch(setErrorAC(e))
+        dispatch(setErrorAC('acasdasdasd'))
+
 
     }
 }
@@ -68,11 +70,11 @@ type TypeActions =
     |ReturnType<typeof setStatusAC>
     |ReturnType<typeof setErrorAC>
     |ReturnType<typeof setDataAC>
-type TypeStatus = 'free'|'loading'|'succeed'|'error'
+export type TypeStatus = 'free'|'loading'|'succeed'|'error'
 export type TypeInitialState  = {
     error:string
     status:TypeStatus
-    data:{}|TypeResponseDataUser
+    data:TypeResponseDataUser|null
 }
 
 export  default Reducer;
