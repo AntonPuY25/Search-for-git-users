@@ -6,13 +6,13 @@ import LinearProgress from '@material-ui/core/LinearProgress'
 import {TypeResponseDataRepos, TypeResponseDataUser} from "../../../../API/api"
 import group from '../../../img/group_24px.png'
 import person from '../../../img/person_24px.png'
+import noRepository from '../../../img/noRepository.png'
 import PaginationPage from "../../../common/paginationPage"
 import {setRepos} from "../../../../BLL/reducers/reducer"
 import {useParams} from 'react-router-dom'
 
 
 function UserPage() {
-
     const status = useSelector(statusSelector)
     const user: TypeResponseDataUser = useSelector(dataUsersSelector)
     const repos: TypeResponseDataRepos = useSelector(dataReposSelector)
@@ -32,7 +32,7 @@ function UserPage() {
 
                     <div className={s.name}>{user.name}</div>
                     <div className={s.link}>
-                        <a href={`${user.html_url}`}>{user.login}</a>
+                        <a href={`${user.html_url}`} rel="noreferrer"  target='_blank'>{user.login}</a>
                     </div>
                     <div className={s.followersGroup}>
                         <div className={s.followers}>
@@ -48,22 +48,26 @@ function UserPage() {
 
                 </div>
 
-
                 <div className={s.repositories}>
-                    <div className={s.repositoriesContainer}>
-                        <h2>Repositories ({user.public_repos})</h2>
-                        {repos.map(item => {
-                            return <div className={s.repository}>
-                                <h2><a href={item.url}>{item.name}</a></h2>
-                                <div>{item.description}</div>
+                {user.public_repos?
+
+                        <div className={s.repositoriesContainer}>
+                            <h2>Repositories ({user.public_repos})</h2>
+                            {repos.map(item => {
+                                return <div className={s.repository}>
+                                    <h2><a href={item.svn_url} rel="noreferrer"  target='_blank'>{item.name}</a></h2>
+                                    <div>{item.description}</div>
+                                </div>
+                            })}
+                            <div className={s.pagination} >
+                                <PaginationPage count={user.public_repos} />
                             </div>
-                        })}
+                        </div>
+
+                    :<div className={s.noRepository}>
+                        <img src={noRepository} alt={'NoRepository'}/>
+                    </div>}</div>
                     </div>
-                    <div className={s.pagination} >
-                        <PaginationPage count={user.public_repos} />
-                    </div>
-                </div>
-            </div>
         }
     </>
 }

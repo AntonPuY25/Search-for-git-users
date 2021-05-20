@@ -51,7 +51,7 @@ export type TypeResponseDataUser = {
 }
 export type TypeRepos={
     name:string
-    url:string
+    svn_url:string
     description:null|string
 }
 
