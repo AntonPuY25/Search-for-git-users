@@ -4,7 +4,7 @@ import {Api, TypeResponseDataUser} from "../../API/api";
 const initialState:TypeInitialState = {
     error:'',
     status:'free',
-    data:null
+    data: {} as TypeResponseDataUser
 }
 const setStatusAC = (status:TypeStatus)=>{
     return{
@@ -74,7 +74,7 @@ export type TypeStatus = 'free'|'loading'|'succeed'|'error'
 export type TypeInitialState  = {
     error:string
     status:TypeStatus
-    data:TypeResponseDataUser|null
+    data:TypeResponseDataUser
 }
 
 export  default Reducer;
