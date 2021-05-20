@@ -1,12 +1,16 @@
-import axios from "axios";
+import axios from "axios"
 
 const instance = axios.create({
     baseURL:'https://api.github.com'
 })
 
 export const Api = {
-    getUsers(){
-        return instance.get<TypeResponseDataUser>('/users/AntonPuY25')
+    getUsers(user:string){
+        return instance.get<TypeResponseDataUser>(`/users/${user}`)
+            .then(response => response)
+    },
+    getRepos(page:string,user:string){
+        return instance.get<TypeResponseDataRepos>(`/users/${user}/repos?per_page=4&page=${page}`)
             .then(response => response.data)
     }
 }
@@ -45,3 +49,10 @@ export type TypeResponseDataUser = {
     updated_at:string
     url: string
 }
+export type TypeRepos={
+    name:string
+    url:string
+    description:null|string
+}
+
+export type TypeResponseDataRepos = TypeRepos[]

@@ -1,7 +1,6 @@
 import React from 'react'
 import user from '../../../img/user.png'
 import s from './noResult.module.scss'
-import search from "../../../img/search.png";
 
 function ResultsPage() {
     return <div className={s.container}>

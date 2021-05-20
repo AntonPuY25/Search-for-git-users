@@ -1,14 +1,11 @@
-import React from 'react';
-import {Redirect, Route, Switch} from 'react-router-dom';
-import './App.css';
-import ErrorPage from "./UI/components/errorPage/errorPage";
-import MainPage from "./UI/components/main/mainPage/mainPage";
-import Header from "./UI/components/header/header";
-import Footer from "./UI/components/footer/footer";
-import ResultsPage from "./UI/components/main/noResultsPage/noResultsPage";
-import {useSelector} from "react-redux";
-import {errorSelector} from "./BLL/selectors/selectors";
-import UserPage from "./UI/components/main/userPage/userPage";
+import React, {useEffect} from 'react'
+import {Redirect, Route, RouteComponentProps, Switch, withRouter} from 'react-router-dom'
+import './App.css'
+import ErrorPage from "./UI/components/errorPage/errorPage"
+import MainPage from "./UI/components/main/mainPage/mainPage"
+import Header from "./UI/components/header/header"
+import ResultsPage from "./UI/components/main/noResultsPage/noResultsPage"
+import UserPage from "./UI/components/main/userPage/userPage"
 
 export const PATH = {
     mainPage: '/mainPage',
@@ -18,38 +15,38 @@ export const PATH = {
     page404: "/pageNotFound",
     startPage: '/',
 }
+function App(props: RouteComponentProps) {
 
-function App() {
-    const error = useSelector(errorSelector)
-
+    useEffect(()=>{
+        props.history.push(PATH.mainPage)
+    },[props.history])
 
     return (
 
         <div className="container">
-            {  error?  <Redirect  to={PATH.noResultsPage}/>:""}
             <header className='header'>
                 <Header/>
             </header>
             <main className='main'>
                 <Switch>
+
                     <Route exact path={PATH.startPage}
                            render={() => <MainPage/>}/>
                     <Route path={PATH.mainPage}
                            render={() => <MainPage/>}/>
                     <Route path={PATH.noResultsPage}
                            render={() => <ResultsPage/>}/>
-                    <Route path={PATH.userPage}
+                    <Route path={PATH.userPage+ "/:id"}
                            render={() => <UserPage/>}/>
                     <Route path={PATH.page404}
                            render={() => <ErrorPage/>}/>
                     <Redirect from={PATH.pageNotFound} to={PATH.page404}/>
+
                 </Switch>
             </main>
-            <footer className='footer'>
-                <Footer/>
-            </footer>
+
         </div>
     );
 }
 
-export default App;
+export default withRouter(App);

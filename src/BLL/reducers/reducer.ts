@@ -1,10 +1,11 @@
 import {Dispatch} from "redux";
-import {Api, TypeResponseDataUser} from "../../API/api";
+import {Api, TypeResponseDataRepos, TypeResponseDataUser} from "../../API/api";
 
 const initialState:TypeInitialState = {
     error:'',
     status:'free',
-    data: {} as TypeResponseDataUser
+    data: {} as TypeResponseDataUser,
+    repos:[]
 }
 const setStatusAC = (status:TypeStatus)=>{
     return{
@@ -18,10 +19,16 @@ const setErrorAC = (error:string)=>{
         error
     } as const
 }
-const setDataAC = (data:TypeResponseDataUser)=>{
+const setUserAC = (data:TypeResponseDataUser)=>{
     return{
-        type:'/reducer/SET_DATA',
+        type:'/reducer/SET_USERS',
         data
+    } as const
+}
+const setReposAC = (repos:any)=>{
+    return{
+        type:'/reducer/SET_REPOS',
+        repos
     } as const
 }
 const Reducer = (state:TypeInitialState=initialState,action:TypeActions):TypeInitialState=>{
@@ -37,10 +44,15 @@ const Reducer = (state:TypeInitialState=initialState,action:TypeActions):TypeIni
                 ...state,
                 error:action.error
             }
-        case "/reducer/SET_DATA":
+        case "/reducer/SET_USERS":
             return {
                 ...state,
                 data:action.data
+            }
+        case "/reducer/SET_REPOS":
+            return {
+                ...state,
+                repos:action.repos
             }
         default:
             return  state
@@ -48,19 +60,27 @@ const Reducer = (state:TypeInitialState=initialState,action:TypeActions):TypeIni
 }
 
 
-export const getDataTC = ()=> async (dispatch:Dispatch<TypeActions>)=>{
+export const setUserTC = (user:string)=> async (dispatch:Dispatch<TypeActions>)=>{
     dispatch(setStatusAC('loading'))
     try {
-        let result = await Api.getUsers()
-        dispatch(setDataAC(result))
-        dispatch(setStatusAC('succeed'))
-
+        let result = await Api.getUsers(user)
+            dispatch(setUserAC(result.data))
+            dispatch(setStatusAC('succeed'))
     }catch (e) {
         dispatch(setStatusAC('error'))
-        dispatch(setErrorAC('acasdasdasd'))
+        dispatch(setErrorAC(e))
 
 
     }
+}
+export const setRepos = (page:string,user:string)=> async (dispatch:Dispatch<TypeActions>)=>{
+
+  try {
+      let repos = await Api.getRepos(page,user)
+      dispatch(setReposAC(repos))
+  }catch (e) {
+      alert('Some Error')
+  }
 }
 
 
@@ -69,12 +89,14 @@ export const getDataTC = ()=> async (dispatch:Dispatch<TypeActions>)=>{
 type TypeActions =
     |ReturnType<typeof setStatusAC>
     |ReturnType<typeof setErrorAC>
-    |ReturnType<typeof setDataAC>
+    |ReturnType<typeof setUserAC>
+    |ReturnType<typeof setReposAC>
 export type TypeStatus = 'free'|'loading'|'succeed'|'error'
 export type TypeInitialState  = {
     error:string
     status:TypeStatus
     data:TypeResponseDataUser
+    repos:TypeResponseDataRepos
 }
 
 export  default Reducer;

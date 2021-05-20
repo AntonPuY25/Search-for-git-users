@@ -1,5 +1,4 @@
-import React from 'react';
-import s from './errorPage.module.scss'
+import React from 'react'
 
 function ErrorPage() {
     return <>

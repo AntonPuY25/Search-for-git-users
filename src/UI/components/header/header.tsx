@@ -5,8 +5,11 @@ import {createStyles, fade, FormControl, InputBase, makeStyles, Theme} from "@ma
 import SearchIcon from "@material-ui/icons/Search"
 import s from './header.module.scss'
 import git from '../../img/git.png'
-import {useDispatch} from "react-redux";
-import {getDataTC} from "../../../BLL/reducers/reducer";
+import {useDispatch, useSelector} from "react-redux"
+import {setUserTC} from "../../../BLL/reducers/reducer"
+import {Redirect} from "react-router-dom"
+import {PATH} from "../../../App"
+import {statusSelector} from "../../../BLL/selectors/selectors"
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -39,7 +42,6 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         inputInput: {
             padding: theme.spacing(1, 1, 1, 0),
-            // vertical padding + font size from searchIcon
             paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
             transition: theme.transitions.create('width'),
             width: '100%',
@@ -53,16 +55,20 @@ const useStyles = makeStyles((theme: Theme) =>
 
 function Header() {
     const classes = useStyles();
-    const [valueInput,setValueInput] = useState<string>('')
+    const [valueInput, setValueInput] = useState<string>('')
+    const status = useSelector(statusSelector)
+
     const dispatch = useDispatch()
-    const searchFunction = (e:KeyboardEvent<HTMLTextAreaElement | HTMLInputElement>)=> {
-       if(e.code==="Enter"){
-          dispatch(getDataTC())
-           setValueInput('')
-       }
+    const searchFunction = (e: KeyboardEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+        if (e.code === "Enter") {
+            dispatch(setUserTC(valueInput))
+            setValueInput('')
+        }
 
     }
     return <>
+        {status === "succeed"?<Redirect  to={PATH.userPage + '/' + 1}/>:""}
+        {status === "error"? <Redirect  to={PATH.noResultsPage}/>:""}
         <AppBar position="static">
 
             <Toolbar>
@@ -76,7 +82,7 @@ function Header() {
                         <InputBase
                             onKeyUp={searchFunction}
                             value={valueInput}
-                            onChange={(e)=>
+                            onChange={(e) =>
                                 setValueInput(e.currentTarget.value)}
                             placeholder="Search…"
                             classes={{
