@@ -1,29 +1,30 @@
 import React, {useEffect} from 'react'
 import {Redirect, Route, RouteComponentProps, Switch, withRouter} from 'react-router-dom'
 import './App.css'
-import ErrorPage from "./UI/components/errorPage/errorPage"
-import MainPage from "./UI/components/main/mainPage/mainPage"
-import Header from "./UI/components/header/header"
-import ResultsPage from "./UI/components/main/noResultsPage/noResultsPage"
-import UserPage from "./UI/components/main/userPage/userPage"
+import ErrorPage from './UI/components/errorPage/errorPage'
+import MainPage from './UI/components/main/mainPage/mainPage'
+import Header from './UI/components/header/header'
+import ResultsPage from './UI/components/main/noResultsPage/noResultsPage'
+import UserPage from './UI/components/main/userPage/userPage'
 
 export const PATH = {
     mainPage: '/mainPage',
     noResultsPage: '/noResults',
     userPage: '/userPage',
-    pageNotFound: "*",
-    page404: "/pageNotFound",
+    pageNotFound: '*',
+    page404: '/pageNotFound',
     startPage: '/',
 }
+
 function App(props: RouteComponentProps) {
 
-    useEffect(()=>{
+    useEffect(() => {
         props.history.push(PATH.mainPage)
-    },[props.history])
+    }, [props.history])
 
     return (
 
-        <div className="container">
+        <div className='container'>
             <header className='header'>
                 <Header/>
             </header>
@@ -36,7 +37,7 @@ function App(props: RouteComponentProps) {
                            render={() => <MainPage/>}/>
                     <Route path={PATH.noResultsPage}
                            render={() => <ResultsPage/>}/>
-                    <Route path={PATH.userPage+ "/:id"}
+                    <Route path={PATH.userPage + '/:id'}
                            render={() => <UserPage/>}/>
                     <Route path={PATH.page404}
                            render={() => <ErrorPage/>}/>
@@ -49,4 +50,4 @@ function App(props: RouteComponentProps) {
     );
 }
 
-export default withRouter(App);
+export default withRouter(App)

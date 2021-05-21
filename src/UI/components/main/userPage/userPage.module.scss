@@ -12,68 +12,88 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  img{
+
+  img {
     position: relative;
     width: 330px;
     height: 330px;
-    top:5%;
+    top: 5%;
     border-radius: 50%;
+    @media screen and (max-width: 800px) {
+      width: 150px;
+      height: 150px;
+    }
   }
-  .name{
+
+  .name {
     position: relative;
-    right:7%;
+    right: 7%;
     width: 100%;
     top: 10%;
-    left:15%;
+    left: 15%;
 
     font-family: Inter;
     font-weight: bold;
     font-size: 30px;
     line-height: 130%;
+    @media screen and (max-width: 800px) {
+      font-size: 20px;
+
+    }
   }
-  .link{
+
+  .link {
     position: relative;
     width: 100%;
     top: 13%;
-    left:15%;
+    left: 15%;
     font-family: Inter;
     font-style: normal;
     font-weight: bold;
     font-size: 18px;
     line-height: 22px;
     color: #0e6ce7;
-    a{
+
+    a {
       text-decoration: none;
     }
   }
-  .followersGroup{
+
+  .followersGroup {
     width: 70%;
     position: relative;
     display: flex;
     justify-content: space-between;
-    top:18%;
+    top: 18%;
     font-family: Inter;
     font-style: normal;
     font-weight: bold;
     font-size: 16px;
     line-height: 150%;
-          img{
-            position: relative;
-            margin-right: 10px;
-            width: 30px;
-            height: 20px;
-            border-radius: 0;
-            top:2px;
-          }
-    .followers{
-      img{
-        left:0;
+    @media screen and (max-width: 800px) {
+      font-size: 14px;
+      width: 80%;
+    }
+
+    img {
+      position: relative;
+      margin-right: 10px;
+      width: 30px;
+      height: 20px;
+      border-radius: 0;
+      top: 2px;
+    }
+
+    .followers {
+      img {
+        left: 0;
       }
     }
-    .following{
-      img{
+
+    .following {
+      img {
         width: 20px;
-        left:0;
+        left: 0;
       }
     }
 
@@ -84,30 +104,80 @@
 .repositories {
   grid-area: repositories;
   padding: 10px;
-  .repositoriesContainer{
+  @media screen and (max-width: 800px) {
+    padding: 0;
+  }
+
+  .repositoriesContainer {
     margin-left: 5%;
-    .repository{
+
+    h2 {
+      @media screen and (max-width: 1200px) {
+        font-size: 15px;
+      }
+    }
+
+    .repository {
       margin-top: 30px;
       width: 90%;
       height: 150px;
-      background:#FFFFFF ;
-      padding:20px;
+      background: #FFFFFF;
+      padding: 20px;
       box-sizing: border-box;
-      a{
+      @media screen and (max-width: 1200px) {
+        margin-top: 12px;
+        width: 90%;
+        height: 100px;
+        padding: 10px;
+        font-size: 14px;
+      }
+      @media screen and (max-width: 800px) {
+        margin-top: 10px;
+        width: 90%;
+        height: 100px;
+        padding: 2px;
+        font-size: 12px;
+      }
+      @media screen and (max-width: 300px) {
+        margin-top: 10px;
+        width: 90%;
+        height: 100px;
+        padding: 0;
+        font-size: 9px;
+      }
+
+      a {
         text-decoration: none;
       }
     }
   }
-  .pagination{
-  width: 90%;
+
+  .pagination {
+    width: 90%;
     display: flex;
     justify-content: flex-end;
     padding: 15px;
+    @media screen and (max-width: 800px) {
+      padding: 0;
+      width: 100%;
+      justify-content: flex-start;
+    }
   }
-  .noRepository{
+
+  .noRepository {
     height: 60%;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    img {
+      @media screen and (max-width: 600px) {
+        width: 150px;
+      }
+      @media screen and (max-width: 300px) {
+        width: 100px;
+      }
+    }
   }
+
 }

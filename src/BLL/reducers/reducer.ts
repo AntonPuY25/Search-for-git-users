@@ -1,102 +1,100 @@
-import {Dispatch} from "redux";
-import {Api, TypeResponseDataRepos, TypeResponseDataUser} from "../../API/api";
+import {Dispatch} from 'redux'
+import {Api, TypeResponseDataRepos, TypeResponseDataUser} from '../../API/api'
 
-const initialState:TypeInitialState = {
-    error:'',
-    status:'free',
+const initialState: TypeInitialState = {
+    error: '',
+    status: 'free',
     data: {} as TypeResponseDataUser,
-    repos:[]
+    repos: []
 }
-const setStatusAC = (status:TypeStatus)=>{
-    return{
-        type:'/reducer/SET_STATUS',
+export const setStatusAC = (status: TypeStatus) => {
+    return {
+        type: '/reducer/SET_STATUS',
         status
     } as const
 }
-const setErrorAC = (error:string)=>{
-    return{
-        type:'/reducer/SET_ERROR',
+export const setErrorAC = (error: string) => {
+    return {
+        type: '/reducer/SET_ERROR',
         error
     } as const
 }
-const setUserAC = (data:TypeResponseDataUser)=>{
-    return{
-        type:'/reducer/SET_USERS',
+export const setUserAC = (data: TypeResponseDataUser) => {
+    return {
+        type: '/reducer/SET_USERS',
         data
     } as const
 }
-const setReposAC = (repos:any)=>{
-    return{
-        type:'/reducer/SET_REPOS',
+export const setReposAC = (repos: any) => {
+    return {
+        type: '/reducer/SET_REPOS',
         repos
     } as const
 }
-const Reducer = (state:TypeInitialState=initialState,action:TypeActions):TypeInitialState=>{
+export const Reducer = (state: TypeInitialState = initialState, action: TypeActions): TypeInitialState => {
 
     switch (action.type) {
-        case "/reducer/SET_STATUS":
+        case '/reducer/SET_STATUS':
             return {
                 ...state,
-                status:action.status
+                status: action.status
             }
-        case "/reducer/SET_ERROR":
+        case '/reducer/SET_ERROR':
             return {
                 ...state,
-                error:action.error
+                error: action.error
             }
-        case "/reducer/SET_USERS":
+        case '/reducer/SET_USERS':
             return {
                 ...state,
-                data:action.data
+                data: action.data
             }
-        case "/reducer/SET_REPOS":
+        case '/reducer/SET_REPOS':
             return {
                 ...state,
-                repos:action.repos
+                repos: action.repos
             }
         default:
-            return  state
+            return state
     }
 }
 
 
-export const setUserTC = (user:string)=> async (dispatch:Dispatch<TypeActions>)=>{
+export const setUserTC = (user: string) => async (dispatch: Dispatch<TypeActions>) => {
     dispatch(setStatusAC('loading'))
     try {
         let result = await Api.getUsers(user)
-            dispatch(setUserAC(result.data))
-            dispatch(setStatusAC('succeed'))
-    }catch (e) {
+        dispatch(setUserAC(result.data))
+        dispatch(setStatusAC('succeed'))
+    } catch (e) {
         dispatch(setStatusAC('error'))
         dispatch(setErrorAC(e))
 
 
     }
 }
-export const setRepos = (page:string,user:string)=> async (dispatch:Dispatch<TypeActions>)=>{
+export const setRepos = (page: string, user: string) => async (dispatch: Dispatch<TypeActions>) => {
 
-  try {
-      let repos = await Api.getRepos(page,user)
-      dispatch(setReposAC(repos))
-  }catch (e) {
-      alert('Some Error')
-  }
+    try {
+        let repos = await Api.getRepos(page, user)
+        dispatch(setReposAC(repos))
+    } catch (e) {
+        alert('Some Error')
+    }
 }
-
-
 
 
 type TypeActions =
-    |ReturnType<typeof setStatusAC>
-    |ReturnType<typeof setErrorAC>
-    |ReturnType<typeof setUserAC>
-    |ReturnType<typeof setReposAC>
-export type TypeStatus = 'free'|'loading'|'succeed'|'error'
-export type TypeInitialState  = {
-    error:string
-    status:TypeStatus
-    data:TypeResponseDataUser
-    repos:TypeResponseDataRepos
+    | ReturnType<typeof setStatusAC>
+    | ReturnType<typeof setErrorAC>
+    | ReturnType<typeof setUserAC>
+    | ReturnType<typeof setReposAC>
+export type TypeStatus = 'free' | 'loading' | 'succeed' | 'error'
+export type TypeInitialState = {
+    error: string
+    status: TypeStatus
+    data: TypeResponseDataUser
+    repos: TypeResponseDataRepos
 }
 
-export  default Reducer;
+export default Reducer;

@@ -7,10 +7,10 @@ function MainPage() {
     return <div className={s.container}>
 
 
-            <img src={search} alt={'Search'}/>
-            <div className={s.searchText}>
-                Start with searching a GitHub user
-            </div>
+        <img src={search} alt={'Search'}/>
+        <div className={s.searchText}>
+            Start with searching a GitHub user
+        </div>
 
     </div>
 }
