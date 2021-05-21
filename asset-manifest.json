@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/Search-for-git-users/static/css/main.90b6e382.chunk.css",
+    "main.js": "/Search-for-git-users/static/js/main.570a4663.chunk.js",
+    "main.js.map": "/Search-for-git-users/static/js/main.570a4663.chunk.js.map",
+    "runtime-main.js": "/Search-for-git-users/static/js/runtime-main.da6eb1aa.js",
+    "runtime-main.js.map": "/Search-for-git-users/static/js/runtime-main.da6eb1aa.js.map",
+    "static/js/2.05f92607.chunk.js": "/Search-for-git-users/static/js/2.05f92607.chunk.js",
+    "static/js/2.05f92607.chunk.js.map": "/Search-for-git-users/static/js/2.05f92607.chunk.js.map",
+    "static/js/3.f9245d99.chunk.js": "/Search-for-git-users/static/js/3.f9245d99.chunk.js",
+    "static/js/3.f9245d99.chunk.js.map": "/Search-for-git-users/static/js/3.f9245d99.chunk.js.map",
+    "index.html": "/Search-for-git-users/index.html",
+    "static/css/main.90b6e382.chunk.css.map": "/Search-for-git-users/static/css/main.90b6e382.chunk.css.map",
+    "static/js/2.05f92607.chunk.js.LICENSE.txt": "/Search-for-git-users/static/js/2.05f92607.chunk.js.LICENSE.txt",
+    "static/media/git.25d24453.png": "/Search-for-git-users/static/media/git.25d24453.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.da6eb1aa.js",
+    "static/js/2.05f92607.chunk.js",
+    "static/css/main.90b6e382.chunk.css",
+    "static/js/main.570a4663.chunk.js"
+  ]
+}
